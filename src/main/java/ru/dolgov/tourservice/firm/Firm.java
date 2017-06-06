@@ -10,6 +10,15 @@ public class Firm {
     private String address;
     private float rating;
 
+    public Firm() {
+    }
+
+    public Firm(String name, String address, float rating) {
+        this.name = name;
+        this.address = address;
+        this.rating = rating;
+    }
+
     public String getName() {
         return name;
     }
@@ -32,5 +41,10 @@ public class Firm {
 
     public void setRating(float rating) {
         this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return "Firm: " + name + ", address: " + address + ", rating: " + rating;
     }
 }

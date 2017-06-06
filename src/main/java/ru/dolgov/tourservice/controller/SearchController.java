@@ -1,11 +1,11 @@
 package ru.dolgov.tourservice.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import ru.dolgov.tourservice.firm.Firm;
 
 /**
  * @author M. Dolgov
@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE+";charset=UTF-8")
 public class SearchController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/{trend}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Contact> addContact(@RequestBody String json){
+    public ResponseEntity<Firm> addContact(@PathVariable String trend){
+        Firm firm = new Firm(trend, "novosibrsk", 1);
 
-
+        return new ResponseEntity<Firm>(firm, HttpStatus.OK);
     }
 
 }
