@@ -5,4 +5,5 @@ package ru.dolgov.tourservice.controller;
  *         06.06.2017.
  */
 public class SearchController {
+
 }
