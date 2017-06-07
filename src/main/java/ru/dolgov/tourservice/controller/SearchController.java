@@ -12,15 +12,15 @@ import ru.dolgov.tourservice.firm.Firm;
  *         06.06.2017.
  */
 @Controller
-@RequestMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE+";charset=UTF-8")
+@RequestMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SearchController {
 
-    @RequestMapping(value = "/{trend}", method = RequestMethod.GET)
+    @RequestMapping(value = "search/{trend}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Firm> addContact(@PathVariable String trend){
-        Firm firm = new Firm(trend, "novosibrsk", 1);
+        Firm firm = new Firm(trend, "novosibirsk", 1.0f);
+        System.out.println(firm.toString());
 
-        return new ResponseEntity<Firm>(firm, HttpStatus.OK);
+        return new ResponseEntity<>(firm, HttpStatus.OK);
     }
-
 }

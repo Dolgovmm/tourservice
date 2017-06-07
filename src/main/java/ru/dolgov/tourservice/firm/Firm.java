@@ -1,19 +1,21 @@
 package ru.dolgov.tourservice.firm;
 
+import java.io.Serializable;
+
 /**
  * @author M. Dolgov
  *         06.06.2017.
  */
-public class Firm {
+public class Firm implements Serializable{
 
     private String name;
     private String address;
-    private float rating;
+    private Float rating;
 
     public Firm() {
     }
 
-    public Firm(String name, String address, float rating) {
+    public Firm(String name, String address, Float rating) {
         this.name = name;
         this.address = address;
         this.rating = rating;
@@ -35,11 +37,11 @@ public class Firm {
         this.address = address;
     }
 
-    public float getRating() {
+    public Float getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 
