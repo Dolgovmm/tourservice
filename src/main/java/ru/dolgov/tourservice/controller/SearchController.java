@@ -18,9 +18,8 @@ public class SearchController {
     @RequestMapping(value = "search/{trend}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Firm> addContact(@PathVariable String trend){
-        Firm firm = new Firm(trend, "novosibirsk", 1.0f);
-        System.out.println(firm.toString());
 
-        return new ResponseEntity<>(firm, HttpStatus.OK);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
