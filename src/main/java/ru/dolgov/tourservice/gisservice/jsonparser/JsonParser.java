@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface JsonParser {
 
-    public List<Firm> parseFirm(String json);
+    public List<Firm> parseFirms(String json);
 
     public Firm parseProfile(String json);
 }

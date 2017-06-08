@@ -11,7 +11,7 @@ import java.util.List;
 public class JsonParserImpl implements JsonParser {
 
     @Override
-    public List<Firm> parseFirm(String json) {
+    public List<Firm> parseFirms(String json) {
         return null;
     }
 

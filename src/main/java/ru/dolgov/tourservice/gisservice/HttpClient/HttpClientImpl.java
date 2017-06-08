@@ -15,11 +15,6 @@ import java.io.IOException;
  */
 public class HttpClientImpl implements HttpClient{
 
-    private String createURL(String trend, String location) {
-        String url = "http://catalog.api.2gis.ru/search?what=" + trend + "&where=" + location +"&version=1.3&key=ruuxah6217";
-        return url;
-    }
-
     @Override
     public String getJsonFromUrl(String url) throws IOException{
         CloseableHttpClient client = HttpClientBuilder.create().build();
