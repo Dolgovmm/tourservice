@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface Api2gis {
 
-    public List<Firm> getFirmsFrom2gisByTrend(String trend);
+    public List<Firm> getFirmsFrom2gisByTrend(String trend, String location);
 }

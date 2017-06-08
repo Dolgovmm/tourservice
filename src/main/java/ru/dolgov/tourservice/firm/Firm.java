@@ -8,6 +8,8 @@ import java.io.Serializable;
  */
 public class Firm implements Serializable{
 
+    private Long id;
+
     private String name;
     private String address;
     private Float rating;
@@ -15,10 +17,19 @@ public class Firm implements Serializable{
     public Firm() {
     }
 
-    public Firm(String name, String address, Float rating) {
+    public Firm(Long id, String name, String address, Float rating) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.rating = rating;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
