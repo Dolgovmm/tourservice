@@ -16,12 +16,12 @@ import java.util.List;
 public class Api2gisImpl implements Api2gis {
 
     @Override
-    public Firm getFirm(String trend, String location) throws IOException {
+    public List<Firm> getFirm(String trend, String location) throws IOException {
         HttpClient client = new HttpClientImpl();
         String jsonFirms = client.getJsonFromUrl(createURL(trend, location));
         JsonParser parser = new JsonParserImpl();
         List<Firm> list = parser.parseFirms(jsonFirms);
-        return null;
+        return list;
     }
 
     private String createURL(String trend, String location) {
