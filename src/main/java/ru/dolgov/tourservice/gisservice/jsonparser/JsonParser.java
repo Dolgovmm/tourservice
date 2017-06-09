@@ -12,5 +12,5 @@ public interface JsonParser {
 
     public List<Firm> parseFirms(String json);
 
-    public Firm parseProfile(String json);
+    public void parseProfile(String json, Firm firm);
 }

@@ -11,12 +11,12 @@ public class Firm implements Serializable{
     private long id;
     private String name;
     private String address;
-    private Float rating;
+    private double rating;
 
     public Firm() {
     }
 
-    public Firm(long id, String name, String address, Float rating) {
+    public Firm(long id, String name, String address, double rating) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -47,11 +47,11 @@ public class Firm implements Serializable{
         this.address = address;
     }
 
-    public Float getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(Float rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 

@@ -1,7 +1,11 @@
 package ru.dolgov.tourservice.gisservice.jsonparser;
 
+import org.apache.http.HttpStatus;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import ru.dolgov.tourservice.firm.Firm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,11 +16,32 @@ public class JsonParserImpl implements JsonParser {
 
     @Override
     public List<Firm> parseFirms(String json) {
-        return null;
+        final JSONObject jsonObject = new JSONObject(json);
+        final int status = jsonObject.getInt("response_code");
+        if (status == HttpStatus.SC_OK) {
+            final JSONArray jsonArray = jsonObject.getJSONArray("result");
+            final int size = jsonArray.length();
+            final List<Firm> dataList = new ArrayList<>(size);
+            for (int i = 0; i < size; i++) {
+                final JSONObject data = jsonArray.getJSONObject(i);
+                Firm firm = new Firm();
+                firm.setId(data.getLong("id"));
+                firm.setName(data.getString("name"));
+                firm.setAddress(data.getString("address"));
+                dataList.add(firm);
+            }
+            return dataList;
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     @Override
-    public Firm parseProfile(String json) {
-        return null;
+    public void parseProfile(String json, Firm firm) {
+        final JSONObject jsonObject = new JSONObject(json);
+        final int status = jsonObject.getInt("response_code");
+        if (status == HttpStatus.SC_OK) {
+            firm.setRating(jsonObject.getDouble("rating"));
+        }
     }
 }
