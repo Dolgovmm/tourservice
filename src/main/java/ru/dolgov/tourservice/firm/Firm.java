@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author M. Dolgov
  *         06.06.2017.
  */
-public class Firm implements Serializable{
+public class Firm implements Serializable, Comparable<Firm>{
 
     private long id;
     private String name;
@@ -69,5 +69,12 @@ public class Firm implements Serializable{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int compareTo(Firm o) {
+        if (this.getRating() > o.getRating()) return 1;
+        if (this.getRating() < o.getRating()) return -1;
+        return 0;
     }
 }

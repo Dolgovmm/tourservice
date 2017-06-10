@@ -7,7 +7,6 @@ import ru.dolgov.tourservice.gisservice.jsonparser.JsonParserImpl;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -34,20 +33,10 @@ public class Api2gisImpl implements Api2gis{
             getRatingFirm(firm);
         }
 
-        sortFirmList(firmList);
-
-        return firmList.get(0);
-    }
-
-    private void sortFirmList(List<Firm> list) {
-        Collections.sort(list, new Comparator<Firm>() {
-            @Override
-            public int compare(Firm o1, Firm o2) {
-                if (o1.getRating() < o2.getRating()) return 1;
-                if (o1.getRating() > o2.getRating()) return -1;
-                return 0;
-            }
-        });
+        Firm firm = Collections.max(firmList);
+        firm.setName(firm.getName() + ", " + trend);
+        firm.setAddress(location + ", " + firm.getAddress());
+        return firm;
     }
 
     private void getRatingFirm(Firm firm) throws IOException {

@@ -13,6 +13,9 @@ import ru.dolgov.tourservice.gisservice.api2gis.Api2gis;
 import ru.dolgov.tourservice.gisservice.api2gis.Api2gisImpl;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author M. Dolgov
@@ -27,13 +30,27 @@ public class SearchController {
 
     @RequestMapping(value = "/{trend}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<Firm> searchTrend(@PathVariable String trend){
-        Firm firm = null;
+    public ResponseEntity<List<Firm>> searchTrend(@PathVariable String trend){
+        List<String> locations = getLocations();
+        List<Firm> firmList = new ArrayList<>();
         try {
-            firm = api2gis.getFirm(trend, "Новосибирск");
+            for (String location: locations) {
+                firmList.add(api2gis.getFirm(trend, location));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<>(firm, HttpStatus.OK);
+        Collections.sort(firmList);
+        return new ResponseEntity<>(firmList, HttpStatus.OK);
+    }
+
+    private List<String> getLocations() {
+        List<String> locationList = new ArrayList<>();
+        locationList.add("Новосибирск");
+        locationList.add("Омск");
+        locationList.add("Томск");
+        locationList.add("Кемерово");
+        locationList.add("Новокузнецк");
+        return locationList;
     }
 }
