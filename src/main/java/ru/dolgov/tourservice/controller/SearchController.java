@@ -31,10 +31,10 @@ public class SearchController {
     @RequestMapping(value = "/{trend}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<Firm>> searchTrend(@PathVariable String trend){
-        List<String> locations = getLocations();
+        List<String> locationList = getLocations();
         List<Firm> firmList = new ArrayList<>();
         try {
-            for (String location: locations) {
+            for (String location: locationList) {
                 firmList.add(api2gis.getFirm(trend, location));
             }
         } catch (IOException e) {

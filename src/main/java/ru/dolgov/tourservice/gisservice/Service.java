@@ -17,12 +17,10 @@ import java.util.concurrent.Executors;
 public class Service {
 
     private ExecutorService service;
-    private Api2gis api2gis;
     private List<String> locationList;
 
     public Service() {
         service = Executors.newCachedThreadPool();
-        //this.api2gis = new Api2gisImpl();
         this.locationList = new ArrayList<>();
         locationList.add("Новосибирск");
         locationList.add("Кемерово");
@@ -34,11 +32,4 @@ public class Service {
     public void addTask(Command command) {
 
     }
-
-//    public Firm getFirm(String trend) {
-//        for (int i = 0; i < locationList.size(); i++) {
-//            api2gis.getFirm(trend, locationList.get(i));
-//        }
-//
-//    }
 }
