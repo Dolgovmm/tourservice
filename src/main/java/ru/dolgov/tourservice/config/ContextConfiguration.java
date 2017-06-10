@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.dolgov.tourservice.gisservice.HttpClient.HttpClient;
 import ru.dolgov.tourservice.gisservice.HttpClient.HttpClientImpl;
+import ru.dolgov.tourservice.gisservice.MultiThreadService;
 import ru.dolgov.tourservice.gisservice.api2gis.Api2gis;
 import ru.dolgov.tourservice.gisservice.api2gis.Api2gisImpl;
 import ru.dolgov.tourservice.gisservice.jsonparser.JsonParser;
@@ -23,18 +24,18 @@ public class ContextConfiguration {
 
     @Bean
     public Api2gis api2gis() {
-        return new Api2gisImpl(myHttpClient(), jsonParser());
+        return new Api2gisImpl(HttpClient(), jsonParser());
     }
 
     @Bean
-    public HttpClient myHttpClient() {
+    public HttpClient HttpClient() {
         return new HttpClientImpl();
     }
 
-//    @Bean
-//    public CloseableHttpClient closeableHttpClient() {
-//        return HttpClientBuilder.create().build();
-//    }
+    @Bean
+    public MultiThreadService service() {
+        return new MultiThreadService();
+    }
 
 
 }

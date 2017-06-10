@@ -18,7 +18,7 @@
 	<!-- Включаем опцию использования конфигурационных аннотаций (@Annotation-based configuration)-->
 	<context:annotation-config />
 
-	<!-- Определяем папки, в которых будем автоматически искать бины-компоненты (@Component, @Service)  -->
+	<!-- Определяем папки, в которых будем автоматически искать бины-компоненты (@ComponenMultiThreadServicevice)  -->
 	<context:component-scan base-package="ru.dolgov.tourservice.config" />
 	<context:component-scan base-package="ru.dolgov.tourservice.gisservice.api2gis" />
 	<context:component-scan base-package="ru.dolgov.tourservice.gisservice.HttpClient" />

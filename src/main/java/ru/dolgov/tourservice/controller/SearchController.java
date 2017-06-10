@@ -6,13 +6,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import ru.dolgov.tourservice.firm.Firm;
-import ru.dolgov.tourservice.gisservice.Service;
-import ru.dolgov.tourservice.gisservice.api2gis.Api2gis;
-import ru.dolgov.tourservice.gisservice.api2gis.Api2gisImpl;
+import ru.dolgov.tourservice.gisservice.MultiThreadService;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,20 +22,14 @@ import java.util.List;
 public class SearchController {
 
     @Autowired
-    private Api2gis api2gis;
+    private MultiThreadService threadService;
 
     @RequestMapping(value = "/{trend}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<Firm>> searchTrend(@PathVariable String trend){
         List<String> locationList = getLocations();
-        List<Firm> firmList = new ArrayList<>();
-        try {
-            for (String location: locationList) {
-                firmList.add(api2gis.getFirm(trend, location));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        List<Firm> firmList;
+        firmList = threadService.addTask(trend, locationList);
         Collections.sort(firmList);
         return new ResponseEntity<>(firmList, HttpStatus.OK);
     }
