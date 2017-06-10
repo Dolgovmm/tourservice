@@ -22,6 +22,7 @@
 				json=application/json
 			</value>
 		</property>
+		<property name="defaultContentType" value="application/json"/>
 	</bean>
 
 	<!-- Файл с настройками контроллеров -->

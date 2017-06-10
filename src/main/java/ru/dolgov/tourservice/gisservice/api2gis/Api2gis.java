@@ -11,5 +11,7 @@ import java.util.List;
  */
 public interface Api2gis {
 
-    public List<Firm> getFirm(String trend, String location) throws IOException;
+    public Firm getFirm(String trend, String location) throws IOException;
+
+    public void getRatingFirm(Firm firm) throws IOException;
 }

@@ -41,7 +41,12 @@ public class JsonParserImpl implements JsonParser {
         final JSONObject jsonObject = new JSONObject(json);
         final int status = jsonObject.getInt("response_code");
         if (status == HttpStatus.SC_OK) {
-            firm.setRating(jsonObject.getDouble("rating"));
+            Double rating = jsonObject.getDouble("rating");
+            if (rating != null) {
+                firm.setRating(rating);
+            } else {
+                firm.setRating(0);
+            }
         }
     }
 }
