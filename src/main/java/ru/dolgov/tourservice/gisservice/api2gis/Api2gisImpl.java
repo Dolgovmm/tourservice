@@ -27,12 +27,20 @@ public class Api2gisImpl implements Api2gis{
     @Override
     public Firm getFirm(String trend, String location) throws IOException {
         String jsonFirms = client.getJsonFromUrl(createURL(trend, location));
-        System.out.println("response: " + jsonFirms);
+
         List<Firm> firmList = jsonParser.parseFirms(jsonFirms);
+
         for (Firm firm: firmList) {
             getRatingFirm(firm);
         }
-        Collections.sort(firmList, new Comparator<Firm>() {
+
+        sortFirmList(firmList);
+
+        return firmList.get(0);
+    }
+
+    private void sortFirmList(List<Firm> list) {
+        Collections.sort(list, new Comparator<Firm>() {
             @Override
             public int compare(Firm o1, Firm o2) {
                 if (o1.getRating() < o2.getRating()) return 1;
@@ -40,15 +48,9 @@ public class Api2gisImpl implements Api2gis{
                 return 0;
             }
         });
-        for (Firm firm: firmList) {
-            System.out.println(firm.toString());
-        }
-
-        return firmList.get(0);
     }
 
-    @Override
-    public void getRatingFirm(Firm firm) throws IOException {
+    private void getRatingFirm(Firm firm) throws IOException {
         String jsonRating = client.getJsonFromUrl(createURL(firm.getId()));
         JsonParser jsonParser = new JsonParserImpl();
         jsonParser.parseProfile(jsonRating, firm);
