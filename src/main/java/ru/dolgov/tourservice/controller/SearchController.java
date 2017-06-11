@@ -18,7 +18,7 @@ import java.util.List;
  *         06.06.2017.
  */
 @Controller
-@RequestMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=UTF-8")
 public class SearchController {
     static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 
