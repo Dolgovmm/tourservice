@@ -1,5 +1,7 @@
 package ru.dolgov.tourservice.firm;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,7 @@ import java.io.Serializable;
  */
 public class Firm implements Serializable, Comparable<Firm>{
 
+    @JsonIgnore
     private long id;
     private String name;
     private String address;
