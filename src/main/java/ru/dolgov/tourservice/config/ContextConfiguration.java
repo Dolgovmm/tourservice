@@ -36,6 +36,4 @@ public class ContextConfiguration {
     public MultiThreadService service() {
         return new MultiThreadService();
     }
-
-
 }

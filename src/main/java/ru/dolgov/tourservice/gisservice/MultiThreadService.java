@@ -5,6 +5,7 @@ import ru.dolgov.tourservice.firm.Firm;
 import ru.dolgov.tourservice.gisservice.api2gis.Api2gis;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -36,7 +37,14 @@ public class MultiThreadService {
 
         List<Firm> firmList = getFirmList(futureList);
 
+        sortList(firmList);
+
         return firmList;
+    }
+
+    private void sortList(List<Firm> firmList) {
+        Collections.sort(firmList);
+        Collections.reverse(firmList);
     }
 
     private List<Firm> getFirmList(List<Future<Firm>> futureList) {

@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.dolgov.tourservice.firm.Firm;
 import ru.dolgov.tourservice.gisservice.MultiThreadService;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -29,9 +27,6 @@ public class SearchController {
     public ResponseEntity<List<Firm>> searchTrend(@PathVariable String trend){
         List<Firm> firmList;
         firmList = threadService.addTask(trend);
-        Collections.sort(firmList);
         return new ResponseEntity<>(firmList, HttpStatus.OK);
     }
-
-
 }
