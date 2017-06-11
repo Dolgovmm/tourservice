@@ -12,6 +12,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Class implement methods to work with 2gis api. Method getFirm() return list of firm by trend and city.
+ * Trend - word what to search, city - where to search.
+ * Method getRating() set rating to firm from firm list.
  * @author M. Dolgov
  *         08.06.2017.
  */

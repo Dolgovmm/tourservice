@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 /**
+ * Class implement method to get json string from URL. Class used GET request.
  * @author M. Dolgov
  *         08.06.2017.
  */

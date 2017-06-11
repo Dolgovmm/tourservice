@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Class implement methods to parse json string to firm object. Method parseFirms() return list of firm from json string.
+ * Method parseProfile() set field rating in firm object from json string.
  * @author M. Dolgov
  *         08.06.2017.
  */
