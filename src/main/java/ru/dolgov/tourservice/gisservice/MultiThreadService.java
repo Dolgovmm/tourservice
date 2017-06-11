@@ -3,7 +3,6 @@ package ru.dolgov.tourservice.gisservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.dolgov.tourservice.firm.Firm;
 import ru.dolgov.tourservice.gisservice.api2gis.Api2gis;
-import ru.dolgov.tourservice.gisservice.api2gis.Api2gisImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,18 +14,19 @@ import java.util.concurrent.*;
  */
 public class MultiThreadService {
 
-    private ExecutorService threadService;
-
     @Autowired
     private Api2gis api2gis;
+
     private List<Future<Firm>> futureList;
+    private ExecutorService threadService;
 
     public MultiThreadService() {
         threadService = Executors.newCachedThreadPool();
     }
 
-    public List<Firm> addTask(String trend, List<String> locationList) {
+    public List<Firm> addTask(String trend) {
         futureList = new ArrayList<>();
+        List<String> locationList = getLocations();
 
         for (String location: locationList) {
             Callable<Firm> callable = () -> api2gis.getFirm(trend, location);
@@ -34,8 +34,13 @@ public class MultiThreadService {
             futureList.add(future);
         }
 
-        List<Firm> firmList = new ArrayList<>();
+        List<Firm> firmList = getFirmList(futureList);
 
+        return firmList;
+    }
+
+    private List<Firm> getFirmList(List<Future<Firm>> futureList) {
+        List<Firm> firmList = new ArrayList<>();
         for (Future<Firm> future: futureList) {
             try {
                 firmList.add(future.get());
@@ -43,7 +48,16 @@ public class MultiThreadService {
                 e.printStackTrace();
             }
         }
-
         return firmList;
+    }
+
+    private List<String> getLocations() {
+        List<String> locationList = new ArrayList<>();
+        locationList.add("Новосибирск");
+        locationList.add("Омск");
+        locationList.add("Томск");
+        locationList.add("Кемерово");
+        locationList.add("Новокузнецк");
+        return locationList;
     }
 }

@@ -27,20 +27,11 @@ public class SearchController {
     @RequestMapping(value = "/{trend}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<Firm>> searchTrend(@PathVariable String trend){
-        List<String> locationList = getLocations();
         List<Firm> firmList;
-        firmList = threadService.addTask(trend, locationList);
+        firmList = threadService.addTask(trend);
         Collections.sort(firmList);
         return new ResponseEntity<>(firmList, HttpStatus.OK);
     }
 
-    private List<String> getLocations() {
-        List<String> locationList = new ArrayList<>();
-        locationList.add("Новосибирск");
-        locationList.add("Омск");
-        locationList.add("Томск");
-        locationList.add("Кемерово");
-        locationList.add("Новокузнецк");
-        return locationList;
-    }
+
 }
