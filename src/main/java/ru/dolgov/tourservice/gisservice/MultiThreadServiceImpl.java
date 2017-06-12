@@ -2,9 +2,9 @@ package ru.dolgov.tourservice.gisservice;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import ru.dolgov.tourservice.firm.Firm;
 import ru.dolgov.tourservice.gisservice.api2gis.Api2gis;
+import ru.dolgov.tourservice.gisservice.api2gis.Api2gisImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,10 +19,6 @@ import java.util.concurrent.*;
 public class MultiThreadServiceImpl implements MultiThreadService{
     static final Logger logger = LoggerFactory.getLogger(MultiThreadServiceImpl.class);
 
-    @Autowired
-    private Api2gis api2gis;
-
-    private List<Future<Firm>> futureList;
     private ExecutorService threadService;
 
     public MultiThreadServiceImpl() {
@@ -35,13 +31,16 @@ public class MultiThreadServiceImpl implements MultiThreadService{
     public List<Firm> addTask(String trend) {
         logger.debug("add task method");
         logger.debug("create future list");
-        futureList = new ArrayList<>();
+        List<Future<Firm>> futureList = new ArrayList<>();
         logger.debug("get locations to list");
         List<String> locationList = getLocations();
 
         for (String location: locationList) {
             logger.debug("create callable thread with method get firm");
-            Callable<Firm> callable = () -> api2gis.getFirm(trend, location);
+            Callable<Firm> callable = () -> {
+                Api2gis api2gis = new Api2gisImpl();
+                return api2gis.getFirm(trend, location);
+            };
             logger.debug("add callable to thread service");
             Future<Firm> future = threadService.submit(callable);
             logger.debug("add future to future list");

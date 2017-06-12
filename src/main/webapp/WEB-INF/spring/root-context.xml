@@ -23,5 +23,4 @@
 	<context:component-scan base-package="ru.dolgov.tourservice.gisservice.api2gis" />
 	<context:component-scan base-package="ru.dolgov.tourservice.gisservice.HttpClient" />
 	<context:component-scan base-package="ru.dolgov.tourservice.gisservice.jsonparser" />
-	<!--<context:component-scan base-package="com.acme.contactmanager.dao" />-->
 </beans>

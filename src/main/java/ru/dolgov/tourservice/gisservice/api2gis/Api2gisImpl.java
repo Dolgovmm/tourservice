@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.dolgov.tourservice.firm.Firm;
 import ru.dolgov.tourservice.gisservice.HttpClient.HttpClient;
+import ru.dolgov.tourservice.gisservice.HttpClient.HttpClientImpl;
 import ru.dolgov.tourservice.gisservice.jsonparser.JsonParser;
 import ru.dolgov.tourservice.gisservice.jsonparser.JsonParserImpl;
 
@@ -24,10 +25,10 @@ public class Api2gisImpl implements Api2gis{
     private HttpClient client;
     private JsonParser jsonParser;
 
-    public Api2gisImpl(HttpClient client, JsonParser jsonParser) {
+    public Api2gisImpl() {
         logger.debug("begin constructor Api2gisImpl");
-        this.client = client;
-        this.jsonParser = jsonParser;
+        this.client = new HttpClientImpl();
+        this.jsonParser = new JsonParserImpl();
         logger.debug("end constructor Api2gisImpl");
     }
 

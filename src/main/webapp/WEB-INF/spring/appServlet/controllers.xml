@@ -10,7 +10,4 @@
 	<!-- Определяем папку, в которой будем искать веб компоненты (контроллеры) -->
 	<context:component-scan base-package="ru.dolgov.tourservice.controller" />
 
-	<!--<bean class = "ru.dolgov.tourservice.gisservice.api2gis.Api2gisImpl"/>-->
-
-
 </beans>
