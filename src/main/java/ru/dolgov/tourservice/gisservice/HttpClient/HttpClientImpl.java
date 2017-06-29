@@ -22,25 +22,18 @@ public class HttpClientImpl implements HttpClient {
     private CloseableHttpClient client;
 
     public HttpClientImpl() {
-        logger.debug("begin constructor HttpClientImpl");
         client = HttpClientBuilder.create().build();
-        logger.debug("end constructor HttpClientImpl");
     }
 
     @Override
     public String getJsonFromUrl(String url) throws IOException{
-        logger.debug("create get request with url: " + url);
         HttpGet getRequest = new HttpGet(url);
-        logger.debug("execute request by client");
         HttpResponse response = client.execute(getRequest);
-        logger.debug("check client response");
         HttpEntity httpEntity = response.getEntity();
         if (httpEntity != null) {
             String json = EntityUtils.toString(response.getEntity());
-            logger.debug("return json string");
             return json;
         }
-        logger.debug("wrong response, httpEntity is null");
         return null;
     }
 }

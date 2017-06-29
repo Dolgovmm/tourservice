@@ -22,35 +22,24 @@ public class MultiThreadServiceImpl implements MultiThreadService{
     private ExecutorService threadService;
 
     public MultiThreadServiceImpl() {
-        logger.debug("begin constructor MultiThreadServiceImpl");
         threadService = Executors.newCachedThreadPool();
-        logger.debug("end constructor MultiThreadServiceImpl");
     }
 
     @Override
     public List<Firm> addTask(String trend) {
-        logger.debug("add task method");
-        logger.debug("create future list");
         List<Future<Firm>> futureList = new ArrayList<>();
-        logger.debug("get locations to list");
         List<String> locationList = getLocations();
 
         for (String location: locationList) {
-            logger.debug("create callable thread with method get firm");
             Callable<Firm> callable = () -> {
                 Api2gis api2gis = new Api2gisImpl();
                 return api2gis.getFirm(trend, location);
             };
-            logger.debug("add callable to thread service");
             Future<Firm> future = threadService.submit(callable);
-            logger.debug("add future to future list");
             futureList.add(future);
         }
-        logger.debug("get firm list from future list");
         List<Firm> firmList = getFirmList(futureList);
-        logger.debug("sorting firm list by rating");
         sortList(firmList);
-        logger.debug("return firm list");
         return firmList;
     }
 
@@ -65,7 +54,14 @@ public class MultiThreadServiceImpl implements MultiThreadService{
             try {
                 firmList.add(future.get());
             } catch (InterruptedException | ExecutionException e) {
-                logger.error("error get firm list from future list with exception messsage: " + e.getMessage());
+                if (logger.isErrorEnabled()) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Error get firm list from future list{");
+                    sb.append(future.toString());
+                    sb.append("} with message: ");
+                    sb.append(e.getMessage());
+                    logger.error(sb.toString());
+                }
             }
         }
         return firmList;

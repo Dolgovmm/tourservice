@@ -28,11 +28,17 @@ public class SearchController {
     @RequestMapping(value = "/{trend}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<Firm>> searchTrend(@PathVariable String trend){
-        logger.debug("search controller's method with trend: " + trend);
         List<Firm> firmList;
-        logger.debug("add task to search to thread service");
         firmList = threadService.addTask(trend);
-        logger.debug("return firm list and status OK");
+        if (logger.isDebugEnabled()) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Get list of firm {");
+            sb.append(firmList.toString());
+            sb.append("} by trend {");
+            sb.append(trend);
+            sb.append("}");
+            logger.debug(sb.toString());
+        }
         return new ResponseEntity<>(firmList, HttpStatus.OK);
     }
 }
