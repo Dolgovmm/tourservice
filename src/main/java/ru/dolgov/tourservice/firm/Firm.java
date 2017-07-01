@@ -9,6 +9,7 @@ import java.io.Serializable;
  *         06.06.2017.
  */
 public class Firm implements Serializable, Comparable<Firm>{
+	private static final long serialVersionUID = 1L;
 
     @JsonIgnore
     private long id;
